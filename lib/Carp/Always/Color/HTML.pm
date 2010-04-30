@@ -1,6 +1,25 @@
 package Carp::Always::Color::HTML;
 use Carp::Always;
 
+=head1 NAME
+
+Carp::Always::Color::HTML - Carp::Always, but with HTML color
+
+=head1 SYNOPSIS
+
+  use Carp::Always::Color::HTML;
+
+or
+
+  perl -MCarp::Always::Color::HTML -e'sub foo { die "foo" } foo()'
+
+=head1 DESCRIPTION
+
+Like L<Carp::Always::Color>, but forces HTML coloring, regardless of where
+STDERR is pointing to.
+
+=cut
+
 BEGIN { $Carp::Internal{(__PACKAGE__)}++ }
 
 sub _die {
@@ -30,5 +49,18 @@ BEGIN {
 END {
     @SIG{qw(__DIE__ __WARN__)} = @OLD_SIG{qw(__DIE__ __WARN__)};
 }
+
+=head1 AUTHOR
+
+  Jesse Luehrs <doy at tozt dot net>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Jesse Luehrs.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as perl itself.
+
+=cut
 
 1;
