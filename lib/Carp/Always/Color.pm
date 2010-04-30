@@ -1,5 +1,4 @@
 package Carp::Always::Color;
-use Moose;
 
 =head1 NAME
 
@@ -13,8 +12,14 @@ Carp::Always::Color -
 
 =cut
 
-__PACKAGE__->meta->make_immutable;
-no Moose;
+BEGIN {
+    if (-t *STDERR) {
+        require Carp::Always::Color::Term;
+    }
+    else {
+        require Carp::Always::Color::HTML;
+    }
+}
 
 =head1 BUGS
 
