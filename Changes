@@ -1,5 +1,8 @@
 Revision history for Carp::Always::Color
 
+0.03  04/30/2010
+    Sigh, stupid packaging (remove stray test.pl from dist)
+
 0.02  04/30/2010
     Fix some bugs dealing with evals and non-string exceptions
 
