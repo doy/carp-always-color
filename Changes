@@ -1,4 +1,7 @@
 Revision history for Carp::Always::Color
 
+0.02  04/30/2010
+    Fix some bugs dealing with evals and non-string exceptions
+
 0.01  04/30/2010
     Initial release
