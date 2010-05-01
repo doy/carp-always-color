@@ -20,7 +20,7 @@ output_is(<<EOF,
     use Carp::Always::Color::Term;
     warn "foo";
 EOF
-    "\e[33mfoo at -e line 2\e[m\n",
+    "\e[33mfoo\e[m at -e line 2\n",
     "simple warns work");
 
 output_is(<<EOF,
@@ -30,14 +30,14 @@ output_is(<<EOF,
     }
     foo();
 EOF
-    "\e[33mfoo at -e line 3\e[m\n\tmain::foo() called at -e line 5\n",
+    "\e[33mfoo\e[m at -e line 3\n\tmain::foo() called at -e line 5\n",
     "warns with a stacktrace work");
 
 output_is(<<EOF,
     use Carp::Always::Color::Term;
     die "foo";
 EOF
-    "\e[31mfoo at -e line 2\e[m\n",
+    "\e[31mfoo\e[m at -e line 2\n",
     "simple dies work");
 
 output_is(<<EOF,
@@ -47,5 +47,5 @@ output_is(<<EOF,
     }
     foo();
 EOF
-    "\e[31mfoo at -e line 3\e[m\n\tmain::foo() called at -e line 5\n",
+    "\e[31mfoo\e[m at -e line 3\n\tmain::foo() called at -e line 5\n",
     "dies with a stacktrace work");

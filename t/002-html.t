@@ -20,7 +20,7 @@ output_is(<<EOF,
     use Carp::Always::Color::HTML;
     warn "foo";
 EOF
-    "<span style=\"color:#880\">foo at -e line 2</span>\n",
+    "<span style=\"color:#880\">foo</span> at -e line 2\n",
     "simple warns work");
 
 output_is(<<EOF,
@@ -30,14 +30,14 @@ output_is(<<EOF,
     }
     foo();
 EOF
-    "<span style=\"color:#880\">foo at -e line 3</span>\n\tmain::foo() called at -e line 5\n",
+    "<span style=\"color:#880\">foo</span> at -e line 3\n\tmain::foo() called at -e line 5\n",
     "warns with a stacktrace work");
 
 output_is(<<EOF,
     use Carp::Always::Color::HTML;
     die "foo";
 EOF
-    "<span style=\"color:#800\">foo at -e line 2</span>\n",
+    "<span style=\"color:#800\">foo</span> at -e line 2\n",
     "simple dies work");
 
 output_is(<<EOF,
@@ -47,5 +47,5 @@ output_is(<<EOF,
     }
     foo();
 EOF
-    "<span style=\"color:#800\">foo at -e line 3</span>\n\tmain::foo() called at -e line 5\n",
+    "<span style=\"color:#800\">foo</span> at -e line 3\n\tmain::foo() called at -e line 5\n",
     "dies with a stacktrace work");

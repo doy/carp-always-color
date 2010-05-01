@@ -23,20 +23,21 @@ STDERR is pointing to.
 BEGIN { $Carp::Internal{(__PACKAGE__)}++ }
 
 sub _die {
+    die @_ if ref($_[0]);
     eval { Carp::Always::_die(@_) };
     my $err = $@;
-    $err =~ s/(.*)/<span style="color:#800">$1<\/span>/;
+    $err =~ s/(.*)( at .*? line .*?$)/<span style="color:#800">$1<\/span>$2/m;
     die $err;
 }
 
 sub _warn {
-    my $warning;
+    my @warning;
     {
-        local $SIG{__WARN__} = sub { $warning = $_[0] };
+        local $SIG{__WARN__} = sub { @warning = @_ };
         Carp::Always::_warn(@_);
     }
-    $warning =~ s/(.*)/<span style="color:#880">$1<\/span>/;
-    warn $warning;
+    $warning[0] =~ s/(.*)( at .*? line .*?$)/<span style="color:#880">$1<\/span>$2/m;
+    warn @warning;
 }
 
 my %OLD_SIG;

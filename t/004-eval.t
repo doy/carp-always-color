@@ -18,20 +18,23 @@ sub output_is {
 
 output_is(<<EOF,
     use Carp::Always::Color;
-    warn "foo";
+    eval { die "foo" };
+    if (\$@) {
+        die \$@;
+    }
 EOF
-    "\e[33mfoo\e[m at -e line 2\n",
-    "detection works for terminal output");
+    "\e[31m\e[31mfoo\e[m\e[m at -e line 4\n",
+    "rethrowing works");
 
 output_is(<<EOF,
-    my \$stderr;
-    BEGIN {
-        close(STDERR);
-        open(STDERR, '>', \\\$stderr);
-    }
     use Carp::Always::Color;
-    warn "foo";
-    print \$stderr;
+    sub foo {
+        eval { die "foo" };
+        if (\$@) {
+            die \$@;
+        }
+    }
+    foo();
 EOF
-    "<span style=\"color:#880\">foo</span> at -e line 7\n",
-    "detection works for terminal output");
+    "\e[31m\e[31mfoo\e[m\e[m at -e line 5\n\tmain::foo() called at -e line 8\n",
+    "rethrowing works inside functions");
