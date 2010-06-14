@@ -2,10 +2,7 @@ package Carp::Always::Color::Term;
 use strict;
 use warnings;
 use Carp::Always;
-
-=head1 NAME
-
-Carp::Always::Color::Term - Carp::Always, but with terminal color
+# ABSTRACT: Carp::Always, but with terminal color
 
 =head1 SYNOPSIS
 
@@ -52,18 +49,5 @@ BEGIN {
 END {
     @SIG{qw(__DIE__ __WARN__)} = @OLD_SIG{qw(__DIE__ __WARN__)};
 }
-
-=head1 AUTHOR
-
-  Jesse Luehrs <doy at tozt dot net>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2010 by Jesse Luehrs.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as perl itself.
-
-=cut
 
 1;
