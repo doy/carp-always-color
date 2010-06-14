@@ -1,4 +1,6 @@
 package Carp::Always::Color::HTML;
+use strict;
+use warnings;
 use Carp::Always;
 
 =head1 NAME

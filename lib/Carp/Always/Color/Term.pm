@@ -1,4 +1,6 @@
 package Carp::Always::Color::Term;
+use strict;
+use warnings;
 use Carp::Always;
 
 =head1 NAME

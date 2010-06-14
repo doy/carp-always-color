@@ -1,4 +1,7 @@
 package Carp::Always::Color;
+use strict;
+use warnings;
+
 BEGIN {
     if (-t *STDERR) {
         require Carp::Always::Color::Term;
