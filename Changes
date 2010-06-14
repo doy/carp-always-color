@@ -1,6 +1,8 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+
+0.04  2010-06-14
       - add strict and warnings
       - convert to more dzil stuff
 
