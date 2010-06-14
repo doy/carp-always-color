@@ -1,6 +1,8 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+      - add strict and warnings
+      - convert to more dzil stuff
 
 0.03  2010-04-30
       - Sigh, stupid packaging (remove stray test.pl from dist)
