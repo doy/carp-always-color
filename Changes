@@ -1,6 +1,8 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+      - un-todo some stuff (and fix a broken test) for the fixes in
+        Carp::Always 0.10
 
 0.04  2010-06-14
       - add strict and warnings
