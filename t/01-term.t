@@ -50,11 +50,9 @@ EOF
     "\e[31mfoo\e[m at -e line 3\n\tmain::foo() called at -e line 5\n",
     "dies with a stacktrace work");
 
-{ local $TODO = "this is a Carp::Always bug";
 output_is(<<EOF,
     use Carp::Always::Color::Term;
     die "foo at bar line 23";
 EOF
     "\e[31mfoo at bar line 23\e[m at -e line 2\n",
     "weird messages work");
-}
