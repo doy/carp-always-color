@@ -23,7 +23,7 @@ output_is(<<EOF,
         die \$@;
     }
 EOF
-    "\e[31m\e[31mfoo\e[m\e[m at -e line 4\n",
+    "\e[31m\e[31mfoo\e[m\e[m at -e line 2\n\teval {...} called at -e line 4\n",
     "rethrowing works");
 
 output_is(<<EOF,
@@ -36,5 +36,5 @@ output_is(<<EOF,
     }
     foo();
 EOF
-    "\e[31m\e[31mfoo\e[m\e[m at -e line 5\n\tmain::foo() called at -e line 8\n",
+    "\e[31m\e[31mfoo\e[m\e[m at -e line 3\n\teval {...} called at -e line 3\n\tmain::foo() called at -e line 5\n\tmain::foo() called at -e line 8\n",
     "rethrowing works inside functions");
