@@ -29,9 +29,45 @@ messages are being sent to a terminal, it colors them with terminal escape
 codes, otherwise it colors them with HTML (ideas for more intelligent behavior
 here are welcome).
 
+=head1 BUGS
+
+No known bugs.
+
+Please report any bugs through RT: email
+C<bug-carp-always-color at rt.cpan.org>, or browse to
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Carp-Always-Color>.
+
 =head1 SEE ALSO
 
 L<Carp::Always>
+
+=head1 SUPPORT
+
+You can find this documentation for this module with the perldoc command.
+
+    perldoc Carp::Always::Color
+
+You can also look for information at:
+
+=over 4
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Carp-Always-Color>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Carp-Always-Color>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Carp-Always-Color>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/Carp-Always-Color>
+
+=back
 
 =cut
 
