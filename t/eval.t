@@ -8,25 +8,25 @@ BEGIN {
     plan tests => 2;
 }
 
-sub output_is {
+sub output_like {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
     my ($script, $expected, $desc) = @_;
     my $pty = IO::Pty::Easy->new;
     $pty->spawn("$^X", "-e", $script);
-    is($pty->read, $expected, $desc);
+    like($pty->read, $expected, $desc);
 }
 
-output_is(<<EOF,
+output_like(<<EOF,
     use Carp::Always::Color;
     eval { die "foo" };
     if (\$@) {
         die \$@;
     }
 EOF
-    "\e[31m\e[31mfoo\e[m\e[m at -e line 2\n\teval {...} called at -e line 4\n",
+    qr/\e\[31m\e\[31mfoo\e\[m\e\[m at -e line 2\.?\n\teval {\.\.\.} called at -e line 4\b/,
     "rethrowing works");
 
-output_is(<<EOF,
+output_like(<<EOF,
     use Carp::Always::Color;
     sub foo {
         eval { die "foo" };
@@ -36,5 +36,5 @@ output_is(<<EOF,
     }
     foo();
 EOF
-    "\e[31m\e[31mfoo\e[m\e[m at -e line 3\n\teval {...} called at -e line 3\n\tmain::foo() called at -e line 5\n\tmain::foo() called at -e line 8\n",
+    qr/\e\[31m\e\[31mfoo\e\[m\e\[m at -e line 3\.?\n\teval {\.\.\.} called at -e line 3\n\tmain::foo\(\) called at -e line 5\.?\n\tmain::foo\(\) called at -e line 8\n/,
     "rethrowing works inside functions");

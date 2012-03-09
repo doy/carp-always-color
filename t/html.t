@@ -8,44 +8,44 @@ BEGIN {
     plan tests => 4;
 }
 
-sub output_is {
+sub output_like {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
     my ($script, $expected, $desc) = @_;
     my $pty = IO::Pty::Easy->new;
     $pty->spawn("$^X", "-e", $script);
-    is($pty->read, $expected, $desc);
+    like($pty->read, $expected, $desc);
 }
 
-output_is(<<EOF,
+output_like(<<EOF,
     use Carp::Always::Color::HTML;
     warn "foo";
 EOF
-    "<span style=\"color:#880\">foo</span> at -e line 2\n",
+    qr+<span style=\"color:#880\">foo</span> at -e line 2\b+,
     "simple warns work");
 
-output_is(<<EOF,
+output_like(<<EOF,
     use Carp::Always::Color::HTML;
     sub foo {
         warn "foo";
     }
     foo();
 EOF
-    "<span style=\"color:#880\">foo</span> at -e line 3\n\tmain::foo() called at -e line 5\n",
+    qr+<span style=\"color:#880\">foo</span> at -e line 3\.?\n\tmain::foo\(\) called at -e line 5\n+,
     "warns with a stacktrace work");
 
-output_is(<<EOF,
+output_like(<<EOF,
     use Carp::Always::Color::HTML;
     die "foo";
 EOF
-    "<span style=\"color:#800\">foo</span> at -e line 2\n",
+    qr+<span style=\"color:#800\">foo</span> at -e line 2\b+,
     "simple dies work");
 
-output_is(<<EOF,
+output_like(<<EOF,
     use Carp::Always::Color::HTML;
     sub foo {
         die "foo";
     }
     foo();
 EOF
-    "<span style=\"color:#800\">foo</span> at -e line 3\n\tmain::foo() called at -e line 5\n",
+    qr+<span style=\"color:#800\">foo</span> at -e line 3\.?\n\tmain::foo\(\) called at -e line 5\n+,
     "dies with a stacktrace work");
