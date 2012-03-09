@@ -1,6 +1,7 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+      - fix some test stuff
 
 0.05  2011-09-04
       - un-todo some stuff (and fix a broken test) for the fixes in
