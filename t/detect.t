@@ -5,7 +5,6 @@ use Test::More;
 BEGIN {
     eval "use IO::Pty::Easy;";
     plan skip_all => "IO::Pty::Easy is required for this test" if $@;
-    plan tests => 2;
 }
 
 sub output_like {
@@ -35,3 +34,5 @@ output_like(<<EOF,
 EOF
     qr+<span style=\"color:#880\">foo</span> at -e line 7\b+,
     "detection works for terminal output");
+
+done_testing;

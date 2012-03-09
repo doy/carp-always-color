@@ -5,7 +5,6 @@ use Test::More;
 BEGIN {
     eval "use IO::Pty::Easy;";
     plan skip_all => "IO::Pty::Easy is required for this test" if $@;
-    plan tests => 2;
 }
 
 sub output_like {
@@ -38,3 +37,5 @@ output_like(<<EOF,
 EOF
     qr/\e\[31m\e\[31mfoo\e\[m\e\[m at -e line 3\.?\n\teval {\.\.\.} called at -e line 3\n\tmain::foo\(\) called at -e line 5\.?\n\tmain::foo\(\) called at -e line 8\n/,
     "rethrowing works inside functions");
+
+done_testing;

@@ -5,7 +5,6 @@ use Test::More;
 BEGIN {
     eval "use IO::Pty::Easy;";
     plan skip_all => "IO::Pty::Easy is required for this test" if $@;
-    plan tests => 5;
 }
 
 sub output_like {
@@ -56,3 +55,5 @@ output_like(<<EOF,
 EOF
     qr/\e\[31mfoo at bar line 23\e\[m at -e line 2\b/,
     "weird messages work");
+
+done_testing;
