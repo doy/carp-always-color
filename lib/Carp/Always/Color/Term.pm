@@ -1,7 +1,7 @@
 package Carp::Always::Color::Term;
 use strict;
 use warnings;
-use Carp::Always;
+use Carp::Always 0.10;
 # ABSTRACT: Carp::Always, but with terminal color
 
 =head1 SYNOPSIS

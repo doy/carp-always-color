@@ -1,7 +1,7 @@
 package Carp::Always::Color::HTML;
 use strict;
 use warnings;
-use Carp::Always;
+use Carp::Always 0.10;
 # ABSTRACT: Carp::Always, but with HTML color
 
 =head1 SYNOPSIS
