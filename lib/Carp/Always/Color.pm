@@ -7,8 +7,14 @@ BEGIN {
     if (-t *STDERR) {
         require Carp::Always::Color::Term;
     }
-    else {
+    elsif (($ENV{GATEWAY_INTERFACE} || '') =~ /CGI/ || $ENV{REQUEST_METHOD} ||
+               $ENV{PLACK_ENV} || $ENV{PLACK_SERVER} ||
+                   $ENV{MOD_PERL}
+               ) {
         require Carp::Always::Color::HTML;
+    }
+    else {
+        require Carp::Always;
     }
 }
 
