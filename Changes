@@ -1,6 +1,8 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+
+0.07  2013-01-02
       - Carp::Always::Color now no longer falls back to HTML coloring by
         default (you can get this behavior by using Carp::Always::Color::HTML
         explicitly, if desired). Carp::Always::Color itself now just leaves the
