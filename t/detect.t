@@ -35,7 +35,7 @@ output_like(<<EOF,
     warn "foo";
     print \$stderr;
 EOF
-    qr+<span style=\"color:#880\">foo</span> at -e line 7\b+,
+    qr+foo at -e line 7\b+,
     "detection works for terminal output");
 
 done_testing;
