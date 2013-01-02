@@ -7,9 +7,6 @@ BEGIN {
     if (-t *STDERR) {
         require Carp::Always::Color::Term;
     }
-    else {
-        require Carp::Always::Color::HTML;
-    }
 }
 
 =head1 SYNOPSIS
@@ -26,8 +23,11 @@ Stack traces are hard to read when the messages wrap, because it's hard to tell
 when one message ends and the next message starts. This just colors the first
 line of each stacktrace, based on whether it's a warning or an error. If
 messages are being sent to a terminal, it colors them with terminal escape
-codes, otherwise it colors them with HTML (ideas for more intelligent behavior
-here are welcome).
+codes. If you want to force this behavior, you can use
+L<Carp::Always::Color::Term> instead, which will always add terminal escape
+codes, even when the messages are being sent to something that doesn't look
+like a terminal. L<Carp::Always::Color::HTML> also exists, to add HTML color
+markup to the messages instead of terminal color codes.
 
 =head1 BUGS
 
