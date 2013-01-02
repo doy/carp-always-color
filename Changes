@@ -1,6 +1,10 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+      - Carp::Always::Color now no longer falls back to HTML coloring by
+        default (you can get this behavior by using Carp::Always::Color::HTML
+        explicitly, if desired). Carp::Always::Color itself now just leaves the
+        output uncolored for non-terminal outputs.
 
 0.06  2012-03-08
       - fix some test stuff
