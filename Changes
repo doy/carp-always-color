@@ -1,6 +1,7 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+      - test fixes for blead (Slaven_Rezic, #117314)
 
 0.07  2013-01-02
       - Carp::Always::Color now no longer falls back to HTML coloring by
