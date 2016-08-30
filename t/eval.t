@@ -2,18 +2,8 @@
 use strict;
 use warnings;
 use Test::More;
-BEGIN {
-    eval "use IO::Pty::Easy;";
-    plan skip_all => "IO::Pty::Easy is required for this test" if $@;
-}
-
-sub output_like {
-    local $Test::Builder::Level = $Test::Builder::Level + 1;
-    my ($script, $expected, $desc) = @_;
-    my $pty = IO::Pty::Easy->new;
-    $pty->spawn("$^X", "-e", $script);
-    like($pty->read, $expected, $desc);
-}
+use lib 't/lib';
+use TestHelpers 'output_like';
 
 output_like(<<EOF,
     use Carp::Always::Color;
