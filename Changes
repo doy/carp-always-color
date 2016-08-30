@@ -1,6 +1,8 @@
 Revision history for Carp::Always::Color
 
 {{$NEXT}}
+
+0.08  2016-08-30
       - test fixes for blead (Slaven_Rezic, #117314)
 
 0.07  2013-01-02
