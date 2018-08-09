@@ -3,11 +3,7 @@ use strict;
 use warnings;
 # ABSTRACT: Carp::Always, but with color
 
-BEGIN {
-    if (-t *STDERR) {
-        require Carp::Always::Color::Term;
-    }
-}
+use if (-t *STDERR), 'Carp::Always::Color::Term';
 
 =head1 SYNOPSIS
 
