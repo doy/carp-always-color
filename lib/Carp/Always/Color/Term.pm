@@ -1,7 +1,8 @@
 package Carp::Always::Color::Term;
 use strict;
 use warnings;
-use Carp::Always 0.10;
+use Carp::Always 0.15 ();
+BEGIN { our @ISA = qw(Carp::Always) }
 # ABSTRACT: Carp::Always, but with terminal color
 
 =head1 SYNOPSIS
@@ -21,33 +22,19 @@ of where STDERR is pointing to.
 
 BEGIN { $Carp::Internal{(__PACKAGE__)}++ }
 
+sub _colormess {
+    my ( $msg, $esc ) = @_;
+    $msg =~ s/(.*)( at .*? line .*?$)/$esc$1\e[m$2/m;
+    $msg;
+}
+
 sub _die {
-    die @_ if ref($_[0]);
-    eval { Carp::Always::_die(@_) };
-    my $err = $@;
-    $err =~ s/(.*)( at .*? line .*?$)/\e[31m$1\e[m$2/m;
-    die $err;
+    die @_ if ref $_[0];
+    die _colormess( &Carp::Always::_longmess, "\e[31m" );
 }
 
 sub _warn {
-    my @warning;
-    {
-        local $SIG{__WARN__} = sub { @warning = @_ };
-        Carp::Always::_warn(@_);
-    }
-    $warning[0] =~ s/(.*)( at .*? line .*?$)/\e[33m$1\e[m$2/m;
-    warn @warning;
-}
-
-my %OLD_SIG;
-BEGIN {
-    @OLD_SIG{qw(__DIE__ __WARN__)} = @SIG{qw(__DIE__ __WARN__)};
-    $SIG{__DIE__} = \&_die;
-    $SIG{__WARN__} = \&_warn;
-}
-
-END {
-    @SIG{qw(__DIE__ __WARN__)} = @OLD_SIG{qw(__DIE__ __WARN__)};
+    warn _colormess( &Carp::Always::_longmess, "\e[33m" );
 }
 
 1;

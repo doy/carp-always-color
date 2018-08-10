@@ -1,7 +1,8 @@
 package Carp::Always::Color::HTML;
 use strict;
 use warnings;
-use Carp::Always 0.10;
+use Carp::Always 0.15 ();
+BEGIN { our @ISA = qw(Carp::Always) }
 # ABSTRACT: Carp::Always, but with HTML color
 
 =head1 SYNOPSIS
@@ -21,33 +22,19 @@ STDERR is pointing to.
 
 BEGIN { $Carp::Internal{(__PACKAGE__)}++ }
 
+sub _colormess {
+    my ( $msg, $css ) = @_;
+    $msg =~ s/(.*)( at .*? line .*?$)/<span style="$css">$1<\/span>$2/m;
+    $msg;
+}
+
 sub _die {
-    die @_ if ref($_[0]);
-    eval { Carp::Always::_die(@_) };
-    my $err = $@;
-    $err =~ s/(.*)( at .*? line .*?$)/<span style="color:#800">$1<\/span>$2/m;
-    die $err;
+    die @_ if ref $_[0];
+    die _colormess( &Carp::Always::_longmess, 'color:#800' );
 }
 
 sub _warn {
-    my @warning;
-    {
-        local $SIG{__WARN__} = sub { @warning = @_ };
-        Carp::Always::_warn(@_);
-    }
-    $warning[0] =~ s/(.*)( at .*? line .*?$)/<span style="color:#880">$1<\/span>$2/m;
-    warn @warning;
-}
-
-my %OLD_SIG;
-BEGIN {
-    @OLD_SIG{qw(__DIE__ __WARN__)} = @SIG{qw(__DIE__ __WARN__)};
-    $SIG{__DIE__} = \&_die;
-    $SIG{__WARN__} = \&_warn;
-}
-
-END {
-    @SIG{qw(__DIE__ __WARN__)} = @OLD_SIG{qw(__DIE__ __WARN__)};
+    warn _colormess( &Carp::Always::_longmess, 'color:#880' );
 }
 
 1;
